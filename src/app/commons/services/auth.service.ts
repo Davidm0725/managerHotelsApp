@@ -13,7 +13,7 @@ export class AuthService {
   constructor() { }
 
   auth(serviceEndpoint: string, dataRq: any): Observable<any> {
-    return this.http.post(serviceEndpoint, JSON.stringify(dataRq));
+    return this.http.get(serviceEndpoint);
   }
 
   getToken() {

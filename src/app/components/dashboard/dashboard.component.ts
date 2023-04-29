@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormComponent } from 'src/app/generic-componets/form/form.component';
 import { HotelsService } from 'src/app/commons/services/hotels.service';
 import { environment } from 'src/enviroments/environment';
+
 const urlBase = environment.URL_BASE;
 
 
@@ -13,10 +14,15 @@ const urlBase = environment.URL_BASE;
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-  displayedColumns: string[] = ['Id', 'Name', 'Email', 'Phone Number', 'Country Name', 'Area', 'Subscription State', 'Actions'];
+  displayedColumns: string[] = ['Id', 'Name', 'Location', 'Phone Number', 'Country Name', 'Status', 'Rooms', 'Rooms available', 'Actions'];
   dataSource: any = [];
   crateDialog = false;
-  subscriberUpdate: any;
+  hotelAction: any;
+  addHt:any;
+  page = 1;
+  totalPage = 0;
+  resultxPage = 0;
+  numRegisters!: number;
   private dialog = inject(MatDialog);
   private hotelsSvc = inject(HotelsService);
 
@@ -29,16 +35,29 @@ export class DashboardComponent {
   }
 
   getHotels() {
-    this.hotelsSvc.getHotels(`${urlBase}/hotels`).subscribe(
+    var countRoomAvailable = 0;
+    this.hotelsSvc.getHotels(`${urlBase}`).subscribe(
       {
         next: resp => {
-          if (resp.data) {
-            // this.countSubs = resp.Count;
-            this.dataSource = resp.data;
-            // this.totalPage = Math.ceil(this.countSubs / 10)
-          } else {
-            // this.showMessage({ severity: 'error', summary: 'Error', detail: 'Internal server error', life: 3000 });
+          if (resp.length > 1) {
+            resp.splice(0, 1);
+            resp.forEach((e: any) => {
+              e.rooms.map((r: any) => {
+                if (r.status === "available") {
+                  countRoomAvailable = countRoomAvailable + 1;
+                }
+              })
+              e.roomsAvailable = countRoomAvailable;
+              countRoomAvailable = 0;
+            });
+            // this.numRegisters = resp.length;
+            // this.dataSource = resp.Data;
+            // this.totalPage = Math.ceil(this.numRegisters / 10)
+            this.dataSource = resp;
           }
+          // else {
+          //   this.showMessage({ severity: 'error', summary: 'Error', detail: 'Internal server error', life: 3000 });
+          // }
         },
         // error: err => {
         //   this.showMessage({ severity: 'error', summary: 'Error', detail: err.error.Message, life: 3000 });
@@ -46,8 +65,8 @@ export class DashboardComponent {
         //     this.router.navigate(['/', 'login']);
         //   }, 1000);
         // }
-
-      });
+      }
+    );
   }
 
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string, element: any): void {
@@ -67,16 +86,28 @@ export class DashboardComponent {
   }
 
   addHotel() {
-    this.subscriberUpdate = { action: 'create', subsUpdate: "" };
+    this.hotelAction = { action: 'add', hotelUpdate: "" };
     this.crateDialog = true;
+  }
+
+  updateHotel(element: any) {
+    this.hotelAction = { action: 'update', hotelUpdate: element };
+    this.crateDialog = true;
+  }
+
+  changeStatusHotel(hotel: any) {
+    hotel.status = hotel.status === "available" ? "disabled" : "available";
+    this.hotelsSvc.updateStatusHotel(`${urlBase}`, hotel)
+      .subscribe(() => this.ngOnInit());
   }
 
   hideDialog(event: any) {
     this.crateDialog = event.creaDialog;
     if (event.action === 'save') {
-      // this.getSubscribers();
+      this.addHt = event.hotel;
+      this.getHotels();
     } else {
-      this.subscriberUpdate = "";
+      this.hotelAction = "";
     }
   }
 

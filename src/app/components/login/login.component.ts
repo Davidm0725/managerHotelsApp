@@ -35,18 +35,19 @@ export class LoginComponent {
       UserName: form.value.userName, Password: form.value.password
     }
     if (form.valid) {
-      this.authservice.auth(`${urlBase}/auth`, body).subscribe(
+      this.authservice.auth(`${urlBase}`, body).subscribe(
         {
           next: resp => {
-            if (resp.status === 200) {
+            const { user } = resp[0];
+            if (user.user === form.value.userName && user.pass === form.value.password) {
               localStorage.setItem('Token', resp.token);
               this.router.navigate(['/', 'dashboard'])
             } else {
-              this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Internal server error', life: 3000 });
+              this.messageService.add({ severity: 'error', summary: 'Error', detail: 'User not found, incorrect username or password!!!', life: 3000 });
             }
           },
           error: err => {
-            this.messageService.add({ severity: 'error', summary: 'Error', detail: err.status === 404 ? 'User not found, incorrect username or password!!!' : err.error, life: 3000 });
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: err.status === 404 ? 'User not found, incorrect username or password!!!' : 'Internal server error', life: 3000 });
           }
         });
     }

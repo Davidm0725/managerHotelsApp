@@ -24,6 +24,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NavigationComponent } from './generic-componets/navigation/navigation.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { FormComponent } from './generic-componets/form/form.component';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './commons/services/in-memory-data.service';
 
 
 
@@ -40,7 +42,6 @@ import { FormComponent } from './generic-componets/form/form.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     ConfirmDialogModule,
@@ -52,7 +53,11 @@ import { FormComponent } from './generic-componets/form/form.component';
     DropdownModule,
     SpinnerModule,
     MaterialModule,
-    LayoutModule
+    LayoutModule,
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { dataEncapsulation: false }
+    )
   ],
   providers: [
     MessageService,

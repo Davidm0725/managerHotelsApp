@@ -1,4 +1,4 @@
-<p-dialog [(visible)]="crateDialog" [style]="{width: '450px'}" header="Create Subscriber" [modal]="true"
+<p-dialog [(visible)]="crateDialog" [style]="{width: '450px'}" header="Hotels manager" [modal]="true"
     styleClass="p-fluid" [closable]="false">
     <p-messages severity="info" class="alertMsgNot"></p-messages>
 
@@ -29,12 +29,19 @@
             </small>
         </div>
         <div class="field">
-            <label for="CountryName">Country</label>
-            <p-dropdown formControlName="countryCode" [options]="countries" optionLabel="Name"
-                placeholder="Select a City">
-            </p-dropdown>
+            <label for="Location">Location</label>
+            <input type="text" id="Location" formControlName="location" pInputText required autofocus />
+            <small class="p-error" *ngIf="submitted && !formCreate.value.location">Location is required.</small>
         </div>
-        <div style="padding-top: 40px; float: right;">
+        <div class="field">
+            <label for="CountryName">Country</label>
+            <input type="text" id="Country" formControlName="country" pInputText required autofocus />
+            <small class="p-error" *ngIf="submitted && !formCreate.value.country">Country is required.</small>
+            <!-- <p-dropdown formControlName="countryCode" [options]="countries" optionLabel="Name"
+                placeholder="Select a City">
+            </p-dropdown> -->
+        </div>
+        <div style="padding-top: 40px; float: right;padding-bottom: 40px;">
             <span class="p-buttonset">
                 <div>
                     <button pButton type="button" label="Cancel" icon="pi pi-times" class="p-button-sm"
