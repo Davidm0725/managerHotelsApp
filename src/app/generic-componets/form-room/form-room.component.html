@@ -1,0 +1,45 @@
+<p-dialog [(visible)]="crateDialog" [style]="{width: '450px'}" header="Add hotel rooms" [modal]="true"
+    styleClass="p-fluid" [closable]="false">
+    <p-messages severity="info" class="alertMsgNot"></p-messages>
+
+    <form [formGroup]="formCreate" (ngSubmit)="saveAll(formCreate)">
+        <div class="field">
+            <label for="numRoom">Room number</label>
+            <input type="text" formControlName="numRoom" pInputText id="numRoom" required autofocus />
+            <small class="p-error" *ngIf="submitted && !formCreate.value.numRoom">Room is required.</small>
+        </div>
+        <div class="field">
+            <label for="basisCost">Basic cost</label>
+            <input type="text" id="basisCost" formControlName="basisCost" pInputText required autofocus />
+            <small class="p-error" *ngIf="submitted && !formCreate.value.basisCost">Basic cost is required.</small>
+
+        </div>
+        <div class="field">
+            <label for="taxes">Taxes</label>
+            <input type="number" id="taxes" formControlName="taxes" pInputText required autofocus />
+            <small class="p-error" *ngIf="submitted && !formCreate.value.taxes">Taxes cost is required.</small>
+
+        </div>
+        <div class="field">
+            <label for="Location">Location</label>
+            <input type="text" id="Location" formControlName="location" pInputText required autofocus />
+            <small class="p-error" *ngIf="submitted && !formCreate.value.location">Location is required.</small>
+        </div>
+        <div class="field">
+            <label for="typeRoom">Type room</label>
+            <input type="text" id="typeRoom" formControlName="typeRoom" pInputText required autofocus />
+            <small class="p-error" *ngIf="submitted && !formCreate.value.typeRoom">Type is required.</small>
+        </div>
+        <div style="padding-top: 40px; float: right;padding-bottom: 40px;">
+            <span class="p-buttonset">
+                <div>
+                    <button pButton type="button" label="Cancel" icon="pi pi-times" class="p-button-sm"
+                        (click)="hideDialog('cancel')"></button>
+                </div>
+                <div>
+                    <button pButton type="submit" label="Add room" icon="pi pi-check" class="p-button-sm"></button>
+                </div>
+            </span>
+        </div>
+    </form>
+</p-dialog>

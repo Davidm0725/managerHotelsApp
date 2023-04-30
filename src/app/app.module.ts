@@ -26,7 +26,8 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { FormComponent } from './generic-componets/form/form.component';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './commons/services/in-memory-data.service';
-
+import { FormRoomComponent } from './generic-componets/form-room/form-room.component';
+import { RoomlistComponent } from './generic-componets/roomlist/roomlist.component';
 
 
 
@@ -37,6 +38,8 @@ import { InMemoryDataService } from './commons/services/in-memory-data.service';
     DashboardComponent,
     FormComponent,
     NavigationComponent,
+    FormRoomComponent,
+    RoomlistComponent,
   ],
   imports: [
     BrowserModule,

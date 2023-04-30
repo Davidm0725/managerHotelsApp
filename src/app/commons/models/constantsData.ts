@@ -13,7 +13,7 @@ interface IHotel {
 }
 
 interface IRoom {
-    id: number,
+    id: string,
     room: number,
     basisCost: number,
     typeRoom: string,

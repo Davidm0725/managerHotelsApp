@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { MatTable } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { FormComponent } from 'src/app/generic-componets/form/form.component';
 import { HotelsService } from 'src/app/commons/services/hotels.service';
@@ -17,8 +17,10 @@ export class DashboardComponent {
   displayedColumns: string[] = ['Id', 'Name', 'Location', 'Phone Number', 'Country Name', 'Status', 'Rooms', 'Rooms available', 'Actions'];
   dataSource: any = [];
   crateDialog = false;
+  roomDialog = false;
+  hotelAddRoom: any;
   hotelAction: any;
-  addHt:any;
+  addHt: any;
   page = 1;
   totalPage = 0;
   resultxPage = 0;
@@ -26,12 +28,18 @@ export class DashboardComponent {
   private dialog = inject(MatDialog);
   private hotelsSvc = inject(HotelsService);
 
+  editRm = false;
+  roomsHotel: any = {};
 
-  constructor(private router: Router) {
+
+  constructor() {
   }
 
   ngOnInit() {
     this.getHotels();
+  }
+  ngOnDestroy() {
+    this.dataSource = [];
   }
 
   getHotels() {
@@ -84,6 +92,15 @@ export class DashboardComponent {
     });
 
   }
+  goBack(event: any) {
+    this.editRm = event;
+    this.getHotels();
+  }
+
+  editRooms(element: any) {
+    this.editRm = true;
+    this.roomsHotel = element;
+  }
 
   addHotel() {
     this.hotelAction = { action: 'add', hotelUpdate: "" };
@@ -110,5 +127,4 @@ export class DashboardComponent {
       this.hotelAction = "";
     }
   }
-
 }

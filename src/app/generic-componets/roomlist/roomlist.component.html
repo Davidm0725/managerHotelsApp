@@ -1,0 +1,81 @@
+<app-form-room [openForm]="roomDialog" [hotelAddRoom]="hotelAddRoom" *ngIf="roomDialog"
+    (hideForm)="hideDialogRoom($event)">
+</app-form-room>
+
+<div class="containerPage">
+    <div style="text-align: center;">
+        <h1>
+            Hotel {{roomsHotel.name}}
+        </h1>
+    </div>
+    <div class="page">
+        <div class="menuBar">
+            <button type="button" class="iconBtn" pButton label="Go back" (click)="goBack()">
+                <mat-icon>arrow_back_ios</mat-icon>
+            </button>
+            <div style="float: right;">
+                <button type="button" pButton pRipple label="Add room +" (click)="addRoom()">
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="containerTable">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <!-- Position Column -->
+            <ng-container matColumnDef="Id">
+                <th mat-header-cell *matHeaderCellDef> Id </th>
+                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="Room">
+                <th mat-header-cell *matHeaderCellDef> Room </th>
+                <td mat-cell *matCellDef="let element"> {{element.room}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="Location">
+                <th mat-header-cell *matHeaderCellDef> Location </th>
+                <td mat-cell *matCellDef="let element"> {{element.location}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="Basic cost">
+                <th mat-header-cell *matHeaderCellDef> Basic cost </th>
+                <td mat-cell *matCellDef="let element"> {{element.basisCost | currency }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Type Room">
+                <th mat-header-cell *matHeaderCellDef>Type Room</th>
+                <td mat-cell *matCellDef="let element"> {{element.typeRoom}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Taxes">
+                <th mat-header-cell *matHeaderCellDef>Taxes</th>
+                <td mat-cell *matCellDef="let element"> {{ element.taxes}}%</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Rooms staus">
+                <th mat-header-cell *matHeaderCellDef>Rooms staus</th>
+                <td mat-cell *matCellDef="let element"> {{ element.status}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Actions">
+                <th mat-header-cell *matHeaderCellDef> Actions</th>
+                <td mat-cell *matCellDef="let element">
+                    <button class="iconBtn" #tooltip="matTooltip" matTooltip="edit rooms" (click)="editRoom(element)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button class="iconBtn" #tooltip="matTooltip" matTooltip="Change state room" (click)="changeState(element)">
+                        <mat-icon>cached</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+
+    </div>
+</div>

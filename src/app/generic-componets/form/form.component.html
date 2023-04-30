@@ -37,9 +37,6 @@
             <label for="CountryName">Country</label>
             <input type="text" id="Country" formControlName="country" pInputText required autofocus />
             <small class="p-error" *ngIf="submitted && !formCreate.value.country">Country is required.</small>
-            <!-- <p-dropdown formControlName="countryCode" [options]="countries" optionLabel="Name"
-                placeholder="Select a City">
-            </p-dropdown> -->
         </div>
         <div style="padding-top: 40px; float: right;padding-bottom: 40px;">
             <span class="p-buttonset">

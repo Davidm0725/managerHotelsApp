@@ -33,7 +33,16 @@ export class HotelsService {
   // getHeroes(heroesUrl: any): Observable<any[]> {
   //   return this.http.get<any[]>(heroesUrl)
   // }
- 
+
+  refreshDatasource(data:any): Observable<any[]> {
+    let result: any[] = [];
+
+    // let randomlyFilledList = this.getTenRandomElements();
+    result.push(data);
+    return of(result);
+    // return result;
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);

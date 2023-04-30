@@ -34,8 +34,6 @@ export class FormComponent {
   countries!: any;
   private hotelsSvc = inject(HotelsService);
   private fb = inject(FormBuilder);
-  private messageService = inject(MessageService);
-  private router = inject(Router);
 
   constructor() {
     this.resetForm();
@@ -83,16 +81,15 @@ export class FormComponent {
   saveAll(form: FormGroup) {
     const { action } = this.hotelAction;
     if (action === 'update') {
-      this.saveUpdateSubscriber(form)
+      this.saveUpdate(form)
     } else {
       this.addHotel(form);
     }
 
   }
 
-  saveUpdateSubscriber(formUpdate: any) {
+  saveUpdate(formUpdate: any) {
     const { hotelUpdate } = this.hotelAction;
-    console.log(formUpdate.value.phone, 'formUpdate.value.phone')
     const body = {
       "id": hotelUpdate.id,
       "name": formUpdate.value.name,
@@ -101,35 +98,20 @@ export class FormComponent {
       "phone": formUpdate.value.phoneNumber,
       "email": formUpdate.value.email,
       "status": "available",
-      "rooms": [],
+      "rooms": hotelUpdate.rooms,
       "bookings": [],
     };
-    console.log(body, 'body')
     this.hotelsSvc.updateStatusHotel(`${urlBase}`, body)
       .subscribe(() => this.hideDialog({ action: 'save', body }));
-    // this.subscribers.updateSubscribers(`${urlBase}subscribers/`, body).subscribe(
-    //   {
-    //     next: resp => {
-    //       if (resp === null) {
-    //         this.hideDialog('save');
-    //       } else {
-    //         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Internal server error', life: 3000 });
-    //       }
-    //     },
-    //     error: err => {
-    //       this.messageService.add({ severity: 'error', summary: 'Error', detail: err.error.Message, life: 3000 });
-    //       this.router.navigate(['/', 'login'])
-    //     }
-    //   });
   }
 
   addHotel(form: FormGroup) {
     this.submitted = true;
     let bodyParamas = {
-      "id": Math.floor(Math.random() * 100),
+      "id": Math.floor(Math.random() * 1000),
       "name": form.value.name,
       "country": form.value.country,
-      "location": "av 20",
+      "location": form.value.location,
       "phone": form.value.phoneNumber,
       "email": form.value.email,
       "status": "available",
@@ -140,20 +122,6 @@ export class FormComponent {
       this.hotelsSvc.addHotel(`${urlBase}`, bodyParamas).subscribe(hotelAdd => {
         this.hideDialog({ action: 'save', hotelAdd });
       });
-      // this..createSubscribers(`${urlBase}subscribers/`, bodyParamas).subscribe(
-      //   {
-      //     next: resp => {
-      //       if (resp.length === 0) {
-      //         this.hideDialog('save');
-      //       } else {
-      //         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Internal server error', life: 3000 });
-      //       }
-      //     },
-      //     error: err => {
-      //       this.messageService.add({ severity: 'error', summary: 'Error', detail: err.error.Message, life: 3000 });
-      //       this.router.navigate(['/', 'login'])
-      //     }
-      //   });
     }
   }
 

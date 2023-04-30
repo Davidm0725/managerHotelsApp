@@ -26,7 +26,6 @@ export class NavigationComponent {
   }
 
   signUp() {
-    console.log('signup')
     localStorage.removeItem('Token');
     this.router.navigate(['/']);
   }
