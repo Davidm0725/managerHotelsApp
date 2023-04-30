@@ -22,7 +22,34 @@ export class InMemoryDataService implements InMemoryDbService {
         "email": "plaza@correo.com",
         "country": "Colombia",
         "status": "available",
-        "bookings": [],
+        "bookings": [
+          {
+            "id": 123,
+            "room": "101",
+            "hotel": "Real plaza",
+            "nameGuest": "David",
+            "basisCost": 125,
+            "typeRoom": "Standard",
+            "totalCost": 147,
+            "status": "checkin",
+            "checkin": "25/05/2023",
+            "checkout": "26/05/2023",
+            "dateBooking": new Date()
+          },
+          {
+            "id": 134,
+            "room": "102",
+            "nameGuest": "Yesika",
+            "hotel": "Real plaza",
+            "basisCost": 125,
+            "typeRoom": "Standard",
+            "totalCost": 147,
+            "status": "checkin",
+            "checkin": "25/05/2023",
+            "checkout": "26/05/2023",
+            "dateBooking": new Date()
+          }
+        ],
         "rooms": [
           {
             "id": "101",

@@ -28,6 +28,8 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './commons/services/in-memory-data.service';
 import { FormRoomComponent } from './generic-componets/form-room/form-room.component';
 import { RoomlistComponent } from './generic-componets/roomlist/roomlist.component';
+import { BookingsComponent } from './components/bookings/bookings.component';
+import { DialogComponent } from './generic-componets/dialog/dialog.component';
 
 
 
@@ -40,6 +42,8 @@ import { RoomlistComponent } from './generic-componets/roomlist/roomlist.compone
     NavigationComponent,
     FormRoomComponent,
     RoomlistComponent,
+    BookingsComponent,
+    DialogComponent,
   ],
   imports: [
     BrowserModule,

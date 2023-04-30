@@ -58,40 +58,29 @@ export class DashboardComponent {
               e.roomsAvailable = countRoomAvailable;
               countRoomAvailable = 0;
             });
-            // this.numRegisters = resp.length;
-            // this.dataSource = resp.Data;
-            // this.totalPage = Math.ceil(this.numRegisters / 10)
             this.dataSource = resp;
           }
-          // else {
-          //   this.showMessage({ severity: 'error', summary: 'Error', detail: 'Internal server error', life: 3000 });
-          // }
-        },
-        // error: err => {
-        //   this.showMessage({ severity: 'error', summary: 'Error', detail: err.error.Message, life: 3000 });
-        //   setTimeout(() => {
-        //     this.router.navigate(['/', 'login']);
-        //   }, 1000);
-        // }
+        }
       }
     );
   }
 
-  openDialog(enterAnimationDuration: string, exitAnimationDuration: string, element: any): void {
-    const dialogRef = this.dialog.open(FormComponent, {
-      width: '450px',
-      enterAnimationDuration,
-      exitAnimationDuration,
-      data: element
-    });
+  // openDialog(enterAnimationDuration: string, exitAnimationDuration: string, element: any): void {
+  //   const dialogRef = this.dialog.open(FormComponent, {
+  //     width: '450px',
+  //     enterAnimationDuration,
+  //     exitAnimationDuration,
+  //     data: element
+  //   });
 
-    dialogRef.afterClosed().subscribe(result => {
-      // if (result.confirm === 'Ok') {
-      //   this.deleteSubs(result.subs);
-      // }
-    });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     // if (result.confirm === 'Ok') {
+  //     //   this.deleteSubs(result.subs);
+  //     // }
+  //   });
 
-  }
+  // }
+
   goBack(event: any) {
     this.editRm = event;
     this.getHotels();

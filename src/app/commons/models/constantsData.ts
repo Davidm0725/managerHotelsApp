@@ -8,7 +8,7 @@ interface IHotel {
     phone: string,
     email: string,
     status: string,
-    bookings?: [],
+    bookings?: IBooking[],
     rooms: IRoom[]
 }
 
@@ -19,4 +19,17 @@ interface IRoom {
     typeRoom: string,
     taxes: number,
     status: string
+}
+
+interface IBooking {
+    id: string,
+    room: number,
+    nameGuest: string,
+    basisCost: number,
+    typeRoom: string,
+    totalCost: number,
+    status: string,
+    checkin: Date,
+    checkout: Date,
+    dateBooking: Date
 }

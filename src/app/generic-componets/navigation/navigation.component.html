@@ -3,8 +3,8 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item (click)="chooseOptions(1)">Hotels</a>
-      <a mat-list-item (click)="chooseOptions(2)">Bookings</a>
+      <a mat-list-item (click)="chooseOptions(1)">Bookings</a>
+      <a mat-list-item (click)="chooseOptions(2)">Hotels</a>
       <a mat-list-item (click)="signUp()">Sign up<mat-icon>exit_to_app</mat-icon></a>
     </mat-nav-list>
   </mat-sidenav>
@@ -16,9 +16,7 @@
       </button>
       <span>Manager Hotels</span>
     </mat-toolbar>
-    <app-dashboard *ngIf="selectOption === 1"></app-dashboard>
-    <div *ngIf="selectOption === 2">
-       <p>works!!</p>
-    </div>
+    <app-bookings *ngIf="selectOption === 1"></app-bookings>
+    <app-dashboard *ngIf="selectOption === 2"></app-dashboard>
   </mat-sidenav-content>
 </mat-sidenav-container>
