@@ -32,8 +32,9 @@ export class InMemoryDataService implements InMemoryDbService {
             "typeRoom": "Standard",
             "totalCost": 147,
             "status": "checkin",
-            "checkin": "25/05/2023",
-            "checkout": "26/05/2023",
+            "checkin": "2023-05-25T18:31:06.794Z",
+            "checkout": "2023-05-26T18:31:06.794Z",
+            "taxes": 5,
             "dateBooking": new Date()
           },
           {
@@ -45,8 +46,9 @@ export class InMemoryDataService implements InMemoryDbService {
             "typeRoom": "Standard",
             "totalCost": 147,
             "status": "checkin",
-            "checkin": "25/05/2023",
-            "checkout": "26/05/2023",
+            "checkin": "2023-05-03T18:31:06.794Z",
+            "checkout": "2023-05-04T18:31:06.794Z",
+            "taxes": 5,
             "dateBooking": new Date()
           }
         ],
@@ -101,8 +103,6 @@ export class InMemoryDataService implements InMemoryDbService {
           }
         ]
       }
-
-
     ];
     return { data };
   }

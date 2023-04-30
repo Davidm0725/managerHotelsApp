@@ -1,1 +1,42 @@
-<p>dialog works!</p>
+<h1 mat-dialog-title>Booking details</h1>
+<div mat-dialog-content>
+    <mat-grid-list cols="2" rowHeight="440px">
+        <mat-grid-tile>
+            <div class="titles">
+                <p>Hotel</p>
+                <p>Reservation number</p>
+                <p>Guest</p>
+                <p>Booking date</p>
+                <p>Room</p>
+                <p>Type room</p>
+                <p>Status</p>
+                <p>CheckIn</p>
+                <p>CheckOut</p>
+                <p>Basic cost</p>
+                <p>Taxes</p>
+                <hr>
+                <p>Total to pay</p>
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <div>
+                <p>{{data.hotel}}</p>
+                <p>{{data.id}}</p>
+                <p>{{data.nameGuest}}</p>
+                <p>{{data.dateBooking |  date: 'dd/MM/yyyy'}}</p>
+                <p>{{data.room}}</p>
+                <p>{{data.typeRoom}}</p>
+                <p>{{data.status}}</p>
+                <p>{{data.checkin |  date: 'dd/MM/yyyy'}}</p>
+                <p>{{data.checkout|  date: 'dd/MM/yyyy'}}</p>
+                <p>{{data.basisCost | currency}}</p>
+                <p>{{data.taxes}}%</p>
+                <hr>
+                <p>{{data.totalCost | currency}}</p>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onConfirm()">Ok</button>
+</div>

@@ -2,8 +2,8 @@ import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { environment } from 'src/enviroments/environment';
 import { MessageService } from 'primeng/api';
-import { Router } from '@angular/router';
 import { HotelsService } from 'src/app/commons/services/hotels.service';
+import Swal from 'sweetalert2';
 
 const urlBase = environment.URL_BASE;
 
@@ -57,14 +57,23 @@ export class FormComponent {
         phoneNumber: hotelUpdate.phone
       });
     }
+  }
 
-
+  showAlert() {
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Hotel has been saved currectly.',
+      showConfirmButton: false,
+      timer: 2000
+    })
   }
 
   hideDialog(action: any) {
     this.crateDialog = false;
     this.submitted = false;
     this.hideForm.emit({ creaDialog: this.crateDialog, action: action.action, hotel: action.hotelAdd });
+    this.showAlert();
     this.resetForm();
   }
 
@@ -99,7 +108,7 @@ export class FormComponent {
       "email": formUpdate.value.email,
       "status": "available",
       "rooms": hotelUpdate.rooms,
-      "bookings": [],
+      "bookings": hotelUpdate.bookings,
     };
     this.hotelsSvc.updateStatusHotel(`${urlBase}`, body)
       .subscribe(() => this.hideDialog({ action: 'save', body }));

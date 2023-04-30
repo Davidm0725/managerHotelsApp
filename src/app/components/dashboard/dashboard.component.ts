@@ -1,7 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { MatTable } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { FormComponent } from 'src/app/generic-componets/form/form.component';
 import { HotelsService } from 'src/app/commons/services/hotels.service';
 import { environment } from 'src/enviroments/environment';
 
@@ -64,22 +62,6 @@ export class DashboardComponent {
       }
     );
   }
-
-  // openDialog(enterAnimationDuration: string, exitAnimationDuration: string, element: any): void {
-  //   const dialogRef = this.dialog.open(FormComponent, {
-  //     width: '450px',
-  //     enterAnimationDuration,
-  //     exitAnimationDuration,
-  //     data: element
-  //   });
-
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     // if (result.confirm === 'Ok') {
-  //     //   this.deleteSubs(result.subs);
-  //     // }
-  //   });
-
-  // }
 
   goBack(event: any) {
     this.editRm = event;

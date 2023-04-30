@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { environment } from 'src/enviroments/environment';
 import { HotelsService } from 'src/app/commons/services/hotels.service';
+import Swal from 'sweetalert2';
 
 const urlBase = environment.URL_BASE;
 @Component({
@@ -55,7 +56,18 @@ export class FormRoomComponent {
     this.crateDialog = false;
     this.submitted = false;
     this.hideForm.emit({ creaDialog: this.crateDialog, action: action });
+    this.showAlert();
     this.resetForm();
+  }
+
+  showAlert() {
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Room has been saved currectly.',
+      showConfirmButton: false,
+      timer: 2000
+    })
   }
 
   saveAll(form: FormGroup) {
